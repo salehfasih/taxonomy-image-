@@ -1,0 +1,29 @@
+function display_tax_image(){
+
+
+      $terms=get_terms('Ads-Type',array('hide_empty' => false, 'parent' => 0));
+        print_r($terms);
+       
+       foreach ($terms as $key=>$term) {
+          
+              $term_link = get_term_link( $term, 'Ads-Type' );
+
+             echo  '<h2  class="parent_heading"><a href="'.$term_link.'">' .$term->name .'</a></h2>';
+
+                   
+                 // echo get_field($term->term_id,'featured_image');
+               $image_url=get_field('featured_image', $term->taxonomy.'_'.$term->term_id);
+               print_r($image_url);
+              echo "<img src=".$image_url['url']."  / >";
+       
+
+
+
+
+       }
+
+   
+
+}
+
+add_shortcode('display_tax_image','display_tax_image');
